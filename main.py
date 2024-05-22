@@ -80,29 +80,31 @@ def remove_manifestation(code):
         return "Não existem manifestações cadastradas!"
 
 
-if __name__ == 'main'=
+list_manifestation = []
+counter_list = 0
+
+print(sistem_menu())
+opcion = read_int("Digite uma opção: ")
+while(opcion!=7):
+    if(opcion==1):
+        print(read_list())
+    elif(opcion==2):
+        type = input("Digite o tipo da manifestação: ")
+        print(read_list_type(type))
+    elif(opcion==3):
+        code = read_int("Digite o código da manifestação: ")
+        type = input("Digite o tipo da manifestação: ")
+        description = input("Digite a manifestação: ")
+        print(register_manifestation(code,type,description))
+    elif(opcion==4):
+        print(manifestations_quantity())
+    elif(opcion==5):
+        code = read_int("Digite o código da manifestação: ")
+        print(search_manifestation(code))
+    elif(opcion==6):
+        code = read_int("Digite o código da manifestação que deseja remover: ")
+        print(remove_manifestation(code))
+    else:
+        print("Digite uma opção válida")
     print(sistem_menu())
     opcion = read_int("Digite uma opção: ")
-    while(opcion!=7):
-        if(opcion==1):
-            print(read_list(list_manifestation))
-        elif(opcion==2):
-            type = input("Digite o tipo da manifestação: ")
-            print(read_list_type(type))
-        elif(opcion==3):
-            code = read_int("Digite o código da manifestação: ")
-            type = input("Digite o tipo da manifestação: ")
-            description = input("Digite a manifestação: ")
-            print(register_manifestation(code,type,description))
-        elif(opcion==4):
-        print(manifestations_quantity())
-        elif(opcion==5):
-            code = read_int("Digite o código da manifestação: ")
-            print(search_manifestation(code))
-        elif(opcion==6):
-            code = read_int("Digite o código da manifestação que deseja remover: ")
-            print(remove_manifestation(code))
-        else:
-            print("Digite uma opção válida")
-        print(sistem_menu())
-        opcion = read_int("Digite uma opção: ")
