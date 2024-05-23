@@ -48,8 +48,9 @@ def read_list_type(type):
     else:
         return "Não existem manifestações cadastradas!"
         
-def register_manifestation(code,type,manifestation):
+def register_manifestation(type,manifestation):
     global counter_list
+    global autoincrement_code
     if(type==1):
         tipo = "Elogio"
     elif(type==2):
@@ -57,12 +58,13 @@ def register_manifestation(code,type,manifestation):
     elif(type==3):
         tipo = "Sugestão"
     new_manifestation = {
-        "code": code,
+        "code": autoincrement_code,
         "type": tipo,
         "manifestation": manifestation
     }
     list_manifestation.append(new_manifestation)
     counter_list += 1
+    autoincrement_code += 1
     return "Manifestação cadastrada! \n"
     
     
@@ -103,6 +105,7 @@ def remove_manifestation(code):
 
 list_manifestation = []
 counter_list = 0
+autoincrement_code = 1
 
 print(sistem_menu())
 opcion = read_int("Digite uma opção: ")
@@ -113,10 +116,9 @@ while(opcion!=7):
         type = read_int("Digite a opção do tipo da manifestação\n 1.Elogio \n 2.Crítica \n 3.Sugestão  \n")
         print(read_list_type(type))
     elif(opcion==3):
-        code = read_int("Digite o código da manifestação: ")
         type = read_int("Digite a opção do tipo da manifestação\n 1.Elogio \n 2.Crítica \n 3.Sugestão  \n")
         description = input("Digite a manifestação: ")
-        print(register_manifestation(code,type,description))
+        print(register_manifestation(type,description))
     elif(opcion==4):
         print(manifestations_quantity())
     elif(opcion==5):
