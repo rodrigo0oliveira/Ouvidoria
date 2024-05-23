@@ -1,12 +1,14 @@
 def sistem_menu():
+    print("\n")
+    print(" Ouvidoria ")
     print("1) Listagem das Manifestações")
     print("2) Listagem de Manifestações por Tipo")
-    print("3)  Criar uma nova Manifestação")
+    print("3) Criar uma nova Manifestação")
     print("4) Exibir quantidade de manifestações")
     print("5) Pesquisar uma manifestação por código")
     print("6) Excluir uma Manifestação pelo Código")
     print("7) Sair do Sistema.")
-    print("")
+    print("\n")
   
 def read_int(msg):
     while True:
@@ -21,50 +23,69 @@ def read_list():
     global list_manifestation
     result = ""
     if(len(list_manifestation)>0):
-        for manifestations in list_manifestation:
-            result += f"Código: {manifestations['code']}, Manifestação: {manifestations['manifestation']}\n"
+        for manifestation in list_manifestation:
+            result += f"Código: {manifestation['code']},Tipo: {manifestation['type']}, Manifestação: {manifestation['manifestation']}\n"
         return result
     else:
         return "Não existem manifestações cadastradas!"
         
 def read_list_type(type):
     global list_manifestation
-    result = ""
+    tipo = ""
+    if(type==1):
+        tipo = "Elogio"
+    elif(type==2):
+        tipo = "Crítica"
+    elif(type==3):
+        tipo = "Sugestão"
+
+    list_type = ""
     if(len(list_manifestation)>0):
         for manifestation in list_manifestation: 
-            if(manifestation['type']==type):
-                result += f"Código: {manifestation['code']},Tipo: {manifestation['type']}, Manifestação: {manifestation['manifestation']}\n"
-        return result   
+            if(manifestation['type']==tipo):
+                list_type += f"Código: {manifestation['code']},Tipo: {manifestation['type']}, Manifestação: {manifestation['manifestation']} \n"
+        return list_type   
     else:
         return "Não existem manifestações cadastradas!"
         
 def register_manifestation(code,type,manifestation):
     global counter_list
+    if(type==1):
+        tipo = "Elogio"
+    elif(type==2):
+        tipo = "Crítica"
+    elif(type==3):
+        tipo = "Sugestão"
     new_manifestation = {
         "code": code,
-        "type": type,
+        "type": tipo,
         "manifestation": manifestation
     }
     list_manifestation.append(new_manifestation)
     counter_list += 1
-    return "Manifestação cadastrada!"
+    return "Manifestação cadastrada! \n"
     
     
 def manifestations_quantity():
-    if(counter_list>0):
-        return  "A ouvidoria possui "+counter_list+" manifestações"
+    if(counter_list==1):
+        return  "A ouvidoria possui ",counter_list," manifestação cadastrada"
+    elif(counter_list>1):
+        return "A ouvidoria possui",counter_list,"manifestações cadastradas!"
     else:
         return "A ouvidoria não possui manifestações cadastradas!"
 
 
 def search_manifestation(code):
     global list_manifestation
+    string = ""
     if(len(list_manifestation)>0):
         for manifestation in list_manifestation:
             if(manifestation['code'] == code):
-               return f"Código: {manifestation['code']},Tipo: {type['type']}, Manifestação: {manifestation['manifestation']}"
+               string += f"Código: {manifestation['code']},Tipo: {manifestation['type']}, Manifestação: {manifestation['manifestation']} "
+            
+            return string
     else:
-        return "Não existem manifestações cadastradas!"
+        return "Não existem manifestações cadastradas! \n"
 
 
 def remove_manifestation(code):
@@ -74,10 +95,10 @@ def remove_manifestation(code):
              if(manifestation['code'] == code):
                  del list_manifestation[index]
                  counter_list -= 1
-                 return "Manifestação removida!"
+                 return "Manifestação removida! \n"
          return "Código não encontrado"    
     else:
-        return "Não existem manifestações cadastradas!"
+        return "Não existem manifestações cadastradas! \n "
 
 
 list_manifestation = []
@@ -89,11 +110,11 @@ while(opcion!=7):
     if(opcion==1):
         print(read_list())
     elif(opcion==2):
-        type = input("Digite o tipo da manifestação: ")
+        type = read_int("Digite a opção do tipo da manifestação\n 1.Elogio \n 2.Crítica \n 3.Sugestão  \n")
         print(read_list_type(type))
     elif(opcion==3):
         code = read_int("Digite o código da manifestação: ")
-        type = input("Digite o tipo da manifestação: ")
+        type = read_int("Digite a opção do tipo da manifestação\n 1.Elogio \n 2.Crítica \n 3.Sugestão  \n")
         description = input("Digite a manifestação: ")
         print(register_manifestation(code,type,description))
     elif(opcion==4):
