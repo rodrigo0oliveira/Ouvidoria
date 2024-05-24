@@ -30,9 +30,11 @@ def read_list_type(type):
         for manifestation in list_manifestation: 
             if(manifestation['type']==tipo):
                 list_type += f"Código: {manifestation['code']},Tipo: {manifestation['type']}, Manifestação: {manifestation['manifestation']} \n"
-        return list_type   
+            list_type = "Tipo não encontrado!" 
     else:
-        return "Não existem manifestações cadastradas!"
+        list_type = "Não existem manifestações cadastradas!"
+    
+    return list_type
         
 def register_manifestation(type,manifestation):
     global counter_list
@@ -73,9 +75,11 @@ def search_manifestation(code):
             if(manifestation['code'] == code):
                string += f"Código: {manifestation['code']},Tipo: {manifestation['type']}, Manifestação: {manifestation['manifestation']} "
             
-            return string
+            string = "Cóigo não encontrado"
     else:
-        return "Não existem manifestações cadastradas! \n"
+        string = "Não existem manifestações cadastradas! \n"
+
+    return string
 
 
 def remove_manifestation(code):
@@ -86,6 +90,6 @@ def remove_manifestation(code):
                  del list_manifestation[index]
                  counter_list -= 1
                  return "Manifestação removida! \n"
-         return "Código não encontrado"    
+             return "Código não encontrado"    
     else:
         return "Não existem manifestações cadastradas! \n "
