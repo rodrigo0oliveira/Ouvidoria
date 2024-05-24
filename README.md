@@ -15,6 +15,7 @@ O projeto refere-se a um sistema de ouvidoria onde o cliente/usuário poderá re
 * services - contém os métodos que realizam as funcionalidades do sistema
 * views - contém os métodos de visualização do usuário, agindo como interfaces
 * main - contém a aplicação principal
+* utils - contém um método utilizavel 
 
 # Funcionalidades do sistema
 
